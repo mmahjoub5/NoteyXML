@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Create a Notey Config {% endblock %}</h1>
+    <form method="post">
+        <label for="LevelName">Title</label>
+        <br>
+        <input type="text" name="title"
+               placeholder="Title of Game"
+               value="{{ request.form['title'] }}"></input>
+        <br>
+        
+        <label for="WorldNumber">World Number</label>
+        <br>
+        <input type="text" name="WorldNumber"
+               placeholder="World Number"
+               value="{{ request.form['WorldNumber'] }}"></input>
+        <br>
+
+        <label for="LevelSummary">Level Summary</label>
+        <br>
+        <textarea name="LevelSummary"
+                  placeholder="Message content for start screen"
+                  rows="15"
+                  cols="30"
+                  >{{ request.form['content'] }}</textarea>
+        <br>
+        <label for = "LevelType">Level Type</label>
+        <br>
+        <input type="text" name="LevelType"
+               placeholder="Level Type"
+               value="{{ request.form['LevelType'] }}"></input>
+        <br>
+        <label for ="VideoLink">Video Link</label>
+        <br>
+        <br>
+        <input type="text" name="VideoLink"
+               placeholder="Video Link"
+               value="{{ request.form['VideoLink'] }}"></input>
+        <br>
+        <label for = "XMLUpload">XML Upload</label>
+        <br>
+        <input type="file" name="XMLUpload"
+               placeholder="XML Upload"
+               enctype="multipart/form-data"
+               value="{{ request.files['XMLUpload'] }}"></input>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

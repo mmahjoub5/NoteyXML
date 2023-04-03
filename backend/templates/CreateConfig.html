@@ -1,0 +1,81 @@
+<!doctype html>
+<title>Upload new File</title>
+<h1>Upload new File</h1>
+<form method=post enctype=multipart/form-data>
+       <h1>App Data</h1>
+       <p> </p>
+        <label for="Title">Title</label>
+        <br>
+        <input type="text" name="Title"
+               placeholder="Title of Game"
+               value="{{ request.form['Title'] }}"></input>
+        <br>
+        
+        <label for="levelType">Level Type</label>
+        <br>
+        <input type="text" name="levelType"
+               placeholder="level Typer"
+               value="{{ request.form['levelType'] }}"></input>
+        <br>
+              
+        <label for="Difficulty">Difficulty</label>
+        <br>
+        <input type="text" name="Difficulty"
+               placeholder="Difficulty"
+               value="{{ request.form['Difficulty'] }}"></input>
+        <br>
+
+        <label for="LevelNumber">Level Number</label>
+        <br>
+        <input type="text" name="LevelNumber"
+               placeholder="LevelNumber"
+               value="{{ request.form['LevelNumber'] }}"></input>
+        <br>
+
+        <label for="jsonFile">JSON File Name</label>
+        <br>
+        <input type="text" name="jsonFile"
+               placeholder="json File"
+               value="{{ request.form['jsonFile'] }}"></input>
+        <br>
+
+
+        <label for="Style">Style</label>
+        <br>
+        <input type="text" name="Style"
+               placeholder="Style"
+               value="{{ request.form['Style'] }}"></input>
+        <br>
+
+        <h1>ConfigManager</h1>
+       <p> </p>
+       <label for="LevelType">Level Type</label>
+       <br>
+       <input type="text" name="LevelType"
+              placeholder="Level Type"
+              value="{{ request.form['LevelType'] }}"></input>
+       <br>
+
+       <h1>StartGameView</h1>
+       <p> </p>
+
+        <label for="LevelSummary">Level Summary</label>
+        <br>
+        <textarea name="LevelSummary"
+                  placeholder="Message content for start screen"
+                  rows="15"
+                  cols="50"
+                  >{{ request.form['LevelSummary'] }}</textarea>
+       <br>
+        <h1>MUSIC XML</h1>
+        <p> </p>
+        <label for ="VideoLink">Video Link</label>
+        <br>
+        <br>
+        <input type="text" name="VideoLink"
+               placeholder="Video Link"
+               value="{{ request.form['VideoLink'] }}"></input>
+        <br>
+  <input type=file name=file>
+  <input type=submit value=Upload>
+</form>
