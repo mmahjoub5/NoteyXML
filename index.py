@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, Response
 from noteyXMLParser.CreateConfig import CreateConfig
 import json
 import os
+from io import BytesIO
 
 app = Flask(__name__)
 
@@ -33,12 +34,15 @@ def createConfig():
         config = createConfigFile(request)
         
         xml = request.files['file']
+        print(type(xml))
         if xml.filename == '': 
             return'No selected file'
         with open('music.xml', 'wb') as fp:
             fp.write(xml.read())
-        x = CreateConfig("music.xml", "config.json")
+        
+        x = CreateConfig(xml_path='music.xml', config_path='config.json')
         x.createConfig()
+
         with open('config.json', 'r') as fp:
             temp_config = json.load(fp)
         
