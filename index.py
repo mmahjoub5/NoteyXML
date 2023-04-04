@@ -3,7 +3,7 @@ from noteyXMLParser.CreateConfig import CreateConfig
 import json
 import os
 from io import BytesIO
-
+import xml.etree.ElementTree as ET
 app = Flask(__name__)
 
 def createConfigFile(request):
@@ -35,16 +35,13 @@ def createConfig():
         
         xml = request.files['file']
         print(type(xml))
-        if xml.filename == '': 
-            return'No selected file'
-        with open('music.xml', 'wb') as fp:
-            fp.write(xml.read())
         
-        x = CreateConfig(xml_path='music.xml', config_path='config.json')
-        x.createConfig()
+        xml_string = xml.read().decode('utf-8')
 
-        with open('config.json', 'r') as fp:
-            temp_config = json.load(fp)
+        x = CreateConfig(xml_string, fileData=True)
+        temp_config = x.createConfig()
+
+    
         
         config["BPMCounter"] = {
             "bpm": temp_config["bpm"],
@@ -55,9 +52,7 @@ def createConfig():
         }
        
         configJson = json.dumps(config,indent=4)
-        #DELETE FILE
-        # os.remove("music.xml")
-        # os.remove("config.json")
+    
         return Response(configJson, 
             mimetype='application/json',
             headers={'Content-Disposition':'attachment;filename=config.json'})
