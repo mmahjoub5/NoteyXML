@@ -37,20 +37,26 @@ def createConfig():
         print(type(xml))
         
         xml_string = xml.read().decode('utf-8')
+        try:
+            x = CreateConfig(xml_string, fileData=True)
+            temp_config = x.createConfig()
+            config["BPMCounter"] = {
+                "bpm": temp_config["bpm"],
+                "beatBase": temp_config["beatBase"],
+            }
+            config["PlaylistManager1"] = {
+                "playString": temp_config["playString"]
+            }
+        except:
+            #create pop up screen showing error 
+            config["BPMCounter"] = {
+                "bpm": "ERROR when parsing xml file",
+                "beatBase": "ERROR when parsing xml file",
+            }
+            config["PlaylistManager1"] = {
+                "playString": "ERROR when parsing xml file"
+            }
 
-        x = CreateConfig(xml_string, fileData=True)
-        temp_config = x.createConfig()
-
-    
-        
-        config["BPMCounter"] = {
-            "bpm": temp_config["bpm"],
-            "beatBase": temp_config["beatBase"],
-        }
-        config["PlaylistManager1"] = {
-              "playString": temp_config["playString"]
-        }
-       
         configJson = json.dumps(config,indent=4)
     
         return Response(configJson, 
